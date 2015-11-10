@@ -14,6 +14,15 @@ function NotesService($http) {
       });
   };
 
+  notesService.save = function(note) {
+    //TODO: something fun with node api
+    return $http.post("//localhost:3000/notes", { note: note })
+    .then(function(response) {
+      notesService.notes.unshift(response.data.note);
+    }, function() {
+
+    });
+  };
 
   notesService.get = function() {
       return notesService.notes;
