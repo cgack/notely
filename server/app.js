@@ -1,3 +1,4 @@
+require('dotenv').load();
 var express = require('express');
 var app = express();
 var Note = require('./models/note');
@@ -28,7 +29,7 @@ app.post('/notes', function(req, res) {
     res.json({
       message: "saved!",
       note: noteData
-    });  
+    });
   });
 });
 
