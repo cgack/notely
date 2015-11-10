@@ -2,13 +2,23 @@ angular.module('notely')
 .service('NotesService', NotesService);
 
 function NotesService($http) {
-  this.notes = [];
+  var notesService = this;
+  notesService.notes = [];
 
-  this.fetch = function() {
+  notesService.fetch = function( callback ) {
       $http.get("//localhost:3000/notes")
       .success(function(notesData){
-            console.log(notesData);
-      })
+        notesService.notes = notesData;
+        if (callback) {
+          callback();
+        }
+      });
+  };
+
+  notesService.fetch2 = $http.get("//localhost:3000/notes");
+
+  notesService.get = function() {
+      return notesService.notes;
   };
 }
 

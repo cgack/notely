@@ -21,12 +21,18 @@
     }
     notesConfig['$inject'] = ['$stateProvider'];
 
-    function NotesController($state, NotesService) {
-      NotesService.fetch();
+    function NotesController($scope, $state, NotesService) {
+      NotesService.fetch(function() {
+        $scope.notes = NotesService.get();
+      });
+
+      NotesService.fetch2.success(function(d) {
+          $scope.notes = d;
+      });
       $state.go('notes.form');
     }
 
-    NotesController['$inject'] = ['$state', 'NotesService'];
+    NotesController['$inject'] = ['$scope', '$state', 'NotesService'];
 })();
 
 // http://anandmanisankar.com/posts/angularjs-dependency-injection-demystified/
