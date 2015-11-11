@@ -54,6 +54,21 @@ app.put('/notes/:id', function(req, res) {
   });
 });
 
+app.delete('/notes/:id', function(req, res) {
+  Note.findOne({ _id: req.params.id })
+  .then(function(note) {
+      note.remove().then(function(){
+        res.json({
+          message: 'note removed',
+          note: note
+        });
+      });
+  }, function(err) {
+
+  })
+
+});
+
 app.listen(3000, function() {
     console.log('listening http://localhost:3000...');
 });

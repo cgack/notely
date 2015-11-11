@@ -48,6 +48,14 @@
           });
         }
       }
+
+      $scope.delete = function() {
+          if ($scope.note._id) {
+            NotesService.delete( $scope.note ).then(function( response) {
+              $state.go('notes.form', { noteId: undefined});
+            });
+          }
+      }
     }
 
 })();

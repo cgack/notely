@@ -43,6 +43,14 @@ function NotesService($http) {
       return noteUpdatePromise;
   };
 
+  self.delete = function( note ) {
+    var noteDeletePromise = $http.delete('//localhost:3000/notes/' + note._id);
+    noteDeletePromise.then(function(response) {
+      self.deleteNote(response.data.note);
+    });
+    return noteDeletePromise;
+  };
+
   self.get = function() {
       return self.notes;
   };
@@ -64,4 +72,13 @@ function NotesService($http) {
         }
       }
   };
+
+  self.deleteNote = function(note) {
+    for (var i = 0; i < self.notes.length; i++) {
+      if (self.notes[i]._id = note._id) {
+        self.notes.splice(i, 1);
+        break;
+      }
+    }
+  }
 }
