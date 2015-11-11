@@ -30,7 +30,7 @@ function NotesService($http) {
   self.findById = function(noteId) {
     for (var i = 0, ii = self.notes.length; i < ii; i++) {
       if (self.notes[i]._id === noteId) {
-        return self.notes[i];
+        return angular.copy(self.notes[i]);
       }
     }
     return {};
