@@ -37,7 +37,14 @@
       $scope.note = NotesService.findById($state.params.noteId);
 
       $scope.save = function() {
-        NotesService.save( $scope.note );
+        // decide to update or create
+        if ($scope.note._id) {
+          $scope.note = NotesService.update( $scope.note );
+        } else {
+          NotesService.create( $scope.note ).then( function(response) {
+            $state.go('notes.form', { noteId: response.data.note._id});
+          });
+        }
       }
     }
 
