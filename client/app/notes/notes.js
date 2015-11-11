@@ -4,12 +4,18 @@
     ])
     .config(notesConfig);
 
+    notesConfig['$inject'] = ['$stateProvider'];
     function notesConfig($stateProvider)   {
 
           $stateProvider
 
             .state('notes', {
               url: '/notes',
+              resolve: {
+                notesLoaded: function(NotesService) {
+                  return NotesService.fetch();
+                }
+              },
               templateUrl: '/notes/notes.html',
               controller: NotesController
             })
@@ -20,27 +26,20 @@
               controller: NotesFormController
             });
     }
-    notesConfig['$inject'] = ['$stateProvider'];
 
+    NotesController['$inject'] = ['$scope', '$state', 'NotesService'];
     function NotesController($scope, $state, NotesService) {
-      $scope.note = {};
+      $scope.notes = NotesService.get();
+    }
+
+
+    NotesFormController.$inject = ['$scope', '$state', 'NotesService'];
+    function NotesFormController($scope, $state, NotesService) {
 
       $scope.save = function() {
         NotesService.save( $scope.note );
       }
 
-      NotesService.fetch().then(function() {
-          $scope.notes = NotesService.get();
-          // TEST for findById
-          // 564242bae4b0ecb0579e2593
-          // var note = NotesService.findById('564242bae4b0ecb0579e2593');
-          // console.log(note);
-      });
-    }
-
-    NotesController['$inject'] = ['$scope', '$state', 'NotesService'];
-
-    function NotesFormController() {
-
+      $scope.note = NotesService.findById($state.params.noteId);
     }
 })();
