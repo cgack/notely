@@ -30,9 +30,10 @@
 
       NotesService.fetch().then(function() {
           $scope.notes = NotesService.get();
+          // 564242bae4b0ecb0579e2593
+          var note = NotesService.findById('564242bae4b0ecb0579e2593');
+          console.log(note);
       });
-
-      $state.go('notes.form');
     }
 
     NotesController['$inject'] = ['$scope', '$state', 'NotesService'];

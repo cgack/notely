@@ -2,30 +2,38 @@ angular.module('notely')
 .service('NotesService', NotesService);
 
 function NotesService($http) {
-  var notesService = this;
-  notesService.notes = [];
+  var self = this;
+  self.notes = [];
 
-  notesService.fetch = function() {
+  self.fetch = function() {
       return $http.get("//localhost:3000/notes")
       .then(function(response){
-        notesService.notes = response.data;
+        self.notes = response.data;
       }, function() {
         // fail
       });
   };
 
-  notesService.save = function(note) {
-    //TODO: something fun with node api
+  self.save = function(note) {
     return $http.post("//localhost:3000/notes", { note: note })
     .then(function(response) {
-      notesService.notes.unshift(response.data.note);
+      self.notes.unshift(response.data.note);
     }, function() {
 
     });
   };
 
-  notesService.get = function() {
-      return notesService.notes;
+  self.get = function() {
+      return self.notes;
+  };
+
+  self.findById = function(noteId) {
+    for (var i = 0, ii = self.notes.length; i < ii; i++) {
+      if (self.notes[i]._id === noteId) {
+        return self.notes[i];
+      }
+    }
+    return {};
   };
 }
 
