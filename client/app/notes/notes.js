@@ -16,7 +16,8 @@
 
             .state('notes.form', {
               url: '/:noteId',
-              templateUrl: '/notes/notes-form.html'
+              templateUrl: '/notes/notes-form.html',
+              controller: NotesFormController
             });
     }
     notesConfig['$inject'] = ['$stateProvider'];
@@ -30,13 +31,16 @@
 
       NotesService.fetch().then(function() {
           $scope.notes = NotesService.get();
+          // TEST for findById
           // 564242bae4b0ecb0579e2593
-          var note = NotesService.findById('564242bae4b0ecb0579e2593');
-          console.log(note);
+          // var note = NotesService.findById('564242bae4b0ecb0579e2593');
+          // console.log(note);
       });
     }
 
     NotesController['$inject'] = ['$scope', '$state', 'NotesService'];
-})();
 
-// http://anandmanisankar.com/posts/angularjs-dependency-injection-demystified/
+    function NotesFormController() {
+
+    }
+})();
