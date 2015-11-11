@@ -46,6 +46,11 @@ app.put('/notes/:id', function(req, res) {
           note: noteData
         });
       });
+  }, function(err) {
+    res.json({
+      message: 'an error occured',
+      error: err
+    });
   });
 });
 
