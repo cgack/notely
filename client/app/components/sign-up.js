@@ -1,5 +1,5 @@
 angular.module('notely')
-.directive('signUp', () => {
+.directive('signUp', ['UsersService', (UsersService) => {
 
   class SignUpController {
     constructor() {
@@ -7,7 +7,7 @@ angular.module('notely')
     }
 
     submit() {
-      alert(this.user.username);
+      UsersService.create(this.user);
     }
   }
   return {
@@ -17,4 +17,4 @@ angular.module('notely')
       bindToController: true,
       templateUrl: '/components/sign-up.html'
   };
-});
+}]);
