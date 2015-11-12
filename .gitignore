@@ -7,3 +7,5 @@ tmp
 Thumbs.db
 .idea
 .env
+client/app/content/bundle.js
+client/app/content/bundle.js.map
