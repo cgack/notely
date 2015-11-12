@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
   }, function(err) {
     res.json(err);
 
-  })
+  });
 
 });
 

@@ -16,7 +16,7 @@ function NotesService($http, API_BASE) {
   };
 
   self.create = function(note) {
-    var noteCreatePromise = $http.post(API_BASE + "notes", { note: note })
+    var noteCreatePromise = $http.post(API_BASE + "notes", { note: note });
     noteCreatePromise
       .then(function(response) {
         self.notes.unshift(response.data.note);
@@ -75,7 +75,7 @@ function NotesService($http, API_BASE) {
 
   self.deleteNote = function(note) {
     for (var i = 0; i < self.notes.length; i++) {
-      if (self.notes[i]._id = note._id) {
+      if (self.notes[i]._id === note._id) {
         self.notes.splice(i, 1);
         break;
       }

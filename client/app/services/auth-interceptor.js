@@ -9,7 +9,7 @@ angular.module('notely')
             }
             return config;
           }
-        }
+        };
   }]);
 
 angular.module('notely')

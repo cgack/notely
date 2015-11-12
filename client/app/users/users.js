@@ -9,5 +9,5 @@
         url: '/sign-up',
         template: '<sign-up></sign-up>'
       });
-  };
+  }
 })();

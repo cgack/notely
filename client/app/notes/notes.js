@@ -48,7 +48,7 @@
             $state.go('notes.form', { noteId: response.data.note._id});
           });
         }
-      }
+      };
 
       $scope.delete = function() {
           if ($scope.note._id) {
@@ -56,7 +56,7 @@
               $state.go('notes.form', { noteId: undefined});
             });
           }
-      }
+      };
     }
 
 })();

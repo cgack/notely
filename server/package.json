@@ -21,6 +21,7 @@
     "sanitize-html": "^1.11.1"
   },
   "devDependencies": {
+    "jshint": "^2.8.0",
     "supervisor": "^0.9.1"
   }
 }

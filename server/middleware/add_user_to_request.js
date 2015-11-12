@@ -1,10 +1,9 @@
-'use strict'
-let jwt = require('jsonwebtoken');
-let User = require('../models/user');
+var jwt = require('jsonwebtoken');
+var User = require('../models/user');
 
 module.exports = ( req, res, next ) => {
-  let authToken = req.headers.authorization;
-  let isLoggingInOrRegistering = !!req.body.user;
+  var authToken = req.headers.authorization;
+  var isLoggingInOrRegistering = !!req.body.user;
 
   if (authToken && !isLoggingInOrRegistering) {
     // decode user id from jwt token and find user

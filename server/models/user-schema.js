@@ -17,6 +17,6 @@ UserSchema.methods.toJSON = function() {
     delete object.password_digest;
     delete object.__v;
     return object;
-}
+};
 
 module.exports =  UserSchema;
