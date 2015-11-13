@@ -6,8 +6,8 @@ angular.module('notely')
         this.authToken = $window.localStorage.getItem('authToken');
       }
       set(token) {
-        this.authToken = token;
-        $window.localStorage.setItem('authToken', this.authToken);
+          this.authToken = token;
+          $window.localStorage.setItem('authToken', this.authToken);
       }
       get() {
         return this.authToken;

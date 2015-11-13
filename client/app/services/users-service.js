@@ -14,6 +14,18 @@ angular.module('notely')
         });
         return userPromise;
       }
+      login(user) {
+        let userPromise = $http.post(`${API_BASE}sessions`, {
+          user: user
+        });
+        userPromise.then((response) => {
+          if (response.message !== "could not authenticate") {
+            AuthToken.set(response.data.auth_token);
+            CurrentUser.set(response.data.user);
+          }
+        });
+        return userPromise;
+      }
     }
     return new UsersService();
 

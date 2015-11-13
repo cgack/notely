@@ -11,6 +11,8 @@ app.use(require('./middleware/add_user_to_request'));
 
 app.use('/api/v1/notes', require('./routes/notes'));
 app.use('/api/v1/users', require('./routes/users'));
+app.use('/api/v1/sessions', require('./routes/sessions'));
+
 
 
 app.listen(3000, function() {

@@ -9,11 +9,11 @@ angular.module('notely')
       }
 
       set(user) {
-        this.currentUser = user;
-        $window.localStorage.setItem(
-          'currentUser',
-          JSON.stringify(this.currentUser)
-        );
+          this.currentUser = user;
+          $window.localStorage.setItem(
+            'currentUser',
+            JSON.stringify(this.currentUser)
+          );
       }
 
       get() {
