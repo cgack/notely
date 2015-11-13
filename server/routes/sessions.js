@@ -10,7 +10,11 @@ router.post('/', (req, res) => {
     if (user) {
       user.authenticate(req.body.user.password, (isMatch) => {
         if (!isMatch) {
-          res.json({ message: 'could not authenticate'});
+          res.json({
+            message: 'could not authenticate',
+            user: {},
+            auth_token: ''
+          });
         } else {
           var token = jwt.sign(user._id, process.env.JWT_SECRET, { expiresIn: 24*60*60 });
           res.json({
@@ -21,7 +25,11 @@ router.post('/', (req, res) => {
         }
       });
     } else {
-      res.json({ message: 'could not authenticate'});
+      res.json({
+        message: 'could not authenticate',
+        user: {},
+        auth_token
+      });
     }
   }, (err) => {
     res.json(err);

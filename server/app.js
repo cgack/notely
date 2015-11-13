@@ -13,8 +13,6 @@ app.use('/api/v1/notes', require('./routes/notes'));
 app.use('/api/v1/users', require('./routes/users'));
 app.use('/api/v1/sessions', require('./routes/sessions'));
 
-
-
 app.listen(3000, function() {
     console.log('listening http://localhost:3000...');
 });

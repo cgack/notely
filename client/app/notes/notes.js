@@ -13,8 +13,24 @@
             .state('notes', {
               url: '/notes',
               resolve: {
-                notesLoaded: ['NotesService', function(NotesService) {
-                  return NotesService.fetch();
+                notesLoaded: ['$q', '$state', '$timeout', 'NotesService', 'CurrentUser',
+                  ($q, $state, $timeout, NotesService, CurrentUser) => {
+                    let deferred = $q.defer();
+                    $timeout(() => {
+                        if (CurrentUser.isSignedIn()) {
+                          NotesService.fetch().then(() => {
+                              deferred.resolve();
+                          }, () => {
+                            deferred.reject();
+                            $state.go('sign-in');
+                          });
+                        } else {
+                          deferred.reject();
+                          $state.go('sign-in');
+                        }
+                    });
+                    // return NotesService.fetch();
+                    return deferred.promise;
                 }]
               },
               templateUrl: '/notes/notes.html',

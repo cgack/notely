@@ -20,7 +20,6 @@
     }
 
     user() {
-      console.log(this.CurrentUser.get());
       return this.CurrentUser.get();
     }
   }
