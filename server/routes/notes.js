@@ -20,6 +20,8 @@ router.post('/', function(req, res) {
       message: "saved!",
       note: noteData
     });
+  }, (err) => {
+    res.send(500, 'There was a problem saving your note.');
   });
 });
 
@@ -36,10 +38,8 @@ router.put('/:id', function(req, res) {
         });
       });
   }, function(err) {
-    res.json({
-      message: 'an error occured',
-      error: err
-    });
+    // TODO: log the err message somewhere?
+    res.send(500, 'There was a problem saving.');
   });
 });
 
@@ -53,7 +53,7 @@ router.delete('/:id', function(req, res) {
         });
       });
   }, function(err) {
-
+    res.send(500, 'There was a problem deleting this note.');
   });
 });
 

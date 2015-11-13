@@ -1,7 +1,8 @@
 (function() {
     angular.module('notely.notes', [
       'ui.router',
-      'textAngular'
+      'textAngular',
+      'flash'
     ])
     .config(notesConfig);
 
@@ -29,7 +30,6 @@
                           $state.go('sign-in');
                         }
                     });
-                    // return NotesService.fetch();
                     return deferred.promise;
                 }]
               },
@@ -49,8 +49,8 @@
       $scope.notes = NotesService.get();
     }
 
-    NotesFormController.$inject = ['$scope', '$state', 'NotesService'];
-    function NotesFormController($scope, $state, NotesService) {
+    NotesFormController.$inject = ['$scope', '$state', 'NotesService', 'Flash'];
+    function NotesFormController($scope, $state, NotesService, Flash) {
       $scope.note = NotesService.findById($state.params.noteId);
 
       $scope.save = function() {
@@ -58,10 +58,14 @@
         if ($scope.note._id) {
           NotesService.update( $scope.note ).then(function(response) {
               $scope.note = angular.copy(response.data.note);
+              Flash.create('success', response.data.message);
+          }, (response) => {
+              Flash.create('danger', response.data);
           });
         } else {
           NotesService.create( $scope.note ).then( function(response) {
             $state.go('notes.form', { noteId: response.data.note._id});
+            Flash.create('success', response.data.message);
           });
         }
       };
